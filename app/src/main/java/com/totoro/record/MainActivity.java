@@ -78,12 +78,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void displayDatabaseInfo() {
         SQLiteDatabase db = recordDbHelper.getReadableDatabase();
-        Cursor cursor = db.rawQuery(" SELECT " + "*" +
-                " FROM " + RecordContract.RecordEntry.TABLE_NAME +
-                " ORDER BY " + RecordContract.RecordEntry.COLUMN_RECORD_YEAR +
-                " , " + RecordContract.RecordEntry.COLUMN_RECORD_MONTH +
-                " , " + RecordContract.RecordEntry.COLUMN_RECORD_DAY, null
-        );
+        Cursor cursor = recordDbHelper.readAllData(db);
         try {
             int yearColumnIndex = cursor.getColumnIndex(RecordContract.RecordEntry.COLUMN_RECORD_YEAR);
             int monthColumnIndex = cursor.getColumnIndex(RecordContract.RecordEntry.COLUMN_RECORD_MONTH);

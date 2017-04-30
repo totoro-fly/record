@@ -7,12 +7,11 @@ import android.provider.BaseColumns;
  */
 
 public class RecordContract {
-    public RecordContract() {
+    private RecordContract() {
     }
 
     public static final class RecordEntry implements BaseColumns {
         public static final String TABLE_NAME = "record";
-        public static final String _ID = BaseColumns._ID;
         public static final String COLUMN_RECORD_YEAR = "year";
         public static final String COLUMN_RECORD_MONTH = "month";
         public static final String COLUMN_RECORD_DAY = "day";

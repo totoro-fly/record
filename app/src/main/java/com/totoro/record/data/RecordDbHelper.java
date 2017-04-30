@@ -1,6 +1,7 @@
 package com.totoro.record.data;
 
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
@@ -9,7 +10,7 @@ import android.database.sqlite.SQLiteOpenHelper;
  */
 
 public class RecordDbHelper extends SQLiteOpenHelper {
-    private static final String DATABASE_NAME = "record5.db";
+    private static final String DATABASE_NAME = "record6.db";
     private static final int DATABASE_VERSION = 1;
 
     public RecordDbHelper(Context context) {
@@ -27,8 +28,19 @@ public class RecordDbHelper extends SQLiteOpenHelper {
         db.execSQL(SQL_CREATE_RECORD_TABLE);
     }
 
+
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 
+    }
+
+    public Cursor readAllData(SQLiteDatabase db) {
+        Cursor cursor = db.rawQuery(" SELECT " + "*" +
+                " FROM " + RecordContract.RecordEntry.TABLE_NAME +
+                " ORDER BY " + RecordContract.RecordEntry.COLUMN_RECORD_YEAR +
+                " , " + RecordContract.RecordEntry.COLUMN_RECORD_MONTH +
+                " , " + RecordContract.RecordEntry.COLUMN_RECORD_DAY, null
+        );
+        return cursor;
     }
 }
