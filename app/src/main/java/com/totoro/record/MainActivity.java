@@ -80,21 +80,27 @@ public class MainActivity extends AppCompatActivity {
         SQLiteDatabase db = recordDbHelper.getReadableDatabase();
         Cursor cursor = recordDbHelper.readAllData(db);
         try {
-            int yearColumnIndex = cursor.getColumnIndex(RecordContract.RecordEntry.COLUMN_RECORD_YEAR);
-            int monthColumnIndex = cursor.getColumnIndex(RecordContract.RecordEntry.COLUMN_RECORD_MONTH);
-            int dayColumnIndex = cursor.getColumnIndex(RecordContract.RecordEntry.COLUMN_RECORD_DAY);
-            int messageColumnIndex = cursor.getColumnIndex(RecordContract.RecordEntry.COLUMN_RECORD_MESSAGE);
-            while (cursor.moveToNext()) {
-                String currentYear = cursor.getString(yearColumnIndex);
-                String currentMonth = cursor.getString(monthColumnIndex);
-                String currentDay = cursor.getString(dayColumnIndex);
-                String currentdate = currentYear + "/" + currentMonth + "/" + currentDay;
-                String currentMessage = cursor.getString(messageColumnIndex);
-                recordTextview.append(currentdate + "\n\n" + currentMessage + "\n\n");
-            }
+            getCursor(cursor);
+
         } finally {
             cursor.close();
             db.close();
+        }
+    }
+
+    private void getCursor(Cursor cursor) {
+        int yearColumnIndex = cursor.getColumnIndex(RecordContract.RecordEntry.COLUMN_RECORD_YEAR);
+        int monthColumnIndex = cursor.getColumnIndex(RecordContract.RecordEntry.COLUMN_RECORD_MONTH);
+        int dayColumnIndex = cursor.getColumnIndex(RecordContract.RecordEntry.COLUMN_RECORD_DAY);
+        int messageColumnIndex = cursor.getColumnIndex(RecordContract.RecordEntry.COLUMN_RECORD_MESSAGE);
+        while (cursor.moveToNext()) {
+            String currentYear = cursor.getString(yearColumnIndex);
+            String currentMonth = cursor.getString(monthColumnIndex);
+            String currentDay = cursor.getString(dayColumnIndex);
+            String currentdate = currentYear + "/" + currentMonth + "/" + currentDay;
+            String currentMessage = cursor.getString(messageColumnIndex);
+            recordTextview.append(currentdate + "\n\n" + currentMessage + "\n\n");
+
         }
     }
 }
