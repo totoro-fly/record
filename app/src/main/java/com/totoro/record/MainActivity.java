@@ -77,6 +77,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void displayDatabaseInfo() {
+        
         SQLiteDatabase db = recordDbHelper.getReadableDatabase();
         Cursor cursor = recordDbHelper.readAllData(db);
         try {
